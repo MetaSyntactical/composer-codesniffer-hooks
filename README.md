@@ -40,6 +40,8 @@ extra field in composer.json:
 }
 ```
 
+On each `composer install` or `composer update` the hook will be deployed to the local git repository.
+
 ## Usage
 
 Every time you try to commit, PHP_CodeSniffer will run on changed `.php` files only. There is nothing to do manually.
