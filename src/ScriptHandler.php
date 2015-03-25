@@ -41,7 +41,7 @@ class ScriptHandler
         }
         $originFile = getcwd().'/.git/hooks/pre-commit';
         if (!is_dir(dirname($originFile))) {
-            mkdir(dirname($originFile, 0777, true));
+            mkdir(dirname($originFile), 0777, true);
         }
         $templateContent = file_get_contents(__DIR__.'/templates/git/hooks/pre-commit-phpcs');
         $originContent = '';

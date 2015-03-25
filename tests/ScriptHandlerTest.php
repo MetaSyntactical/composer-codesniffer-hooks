@@ -248,6 +248,49 @@ EOF
         $className::addPhpCsToPreCommitHook($event);
     }
 
+    public function testThatHookWorksIfNoHooksDirectoryExists()
+    {
+        rmdir(getcwd()."/.git/hooks");
+        self::assertFileNotExists(getcwd()."/.git/hooks", "Precondition failed: Pre-Commit already exists");
+
+        list($event, $package, $io) = $this->mockScriptEvent();
+        $io
+            ->expects(self::never())
+            ->method("writeError")
+        ;
+        $package
+            ->expects(self::once())
+            ->method("getExtra")
+            ->will(self::returnValue(
+                array(
+                    "codesniffer" => array(
+                        "standard" => array(
+                            "dependency" => "example/coding-standard"
+                        ),
+                    ),
+                )
+            ))
+        ;
+        $package
+            ->expects(self::any())
+            ->method("getTargetDir")
+            ->will(self::returnValue("vendor"))
+        ;
+
+        $className = $this->testClassName;
+        $className::addPhpCsToPreCommitHook($event);
+
+        self::assertFileExists(getcwd()."/.git/hooks/pre-commit");
+        self::assertContains(
+            "BEGIN:metasyntactical/composer-codesniffer-hooks",
+            file_get_contents(getcwd()."/.git/hooks/pre-commit")
+        );
+        self::assertContains(
+            "--standard=vendor/example/coding-standard/ruleset.xml",
+            file_get_contents(getcwd()."/.git/hooks/pre-commit")
+        );
+    }
+
     /**
      * @return Event
      */
