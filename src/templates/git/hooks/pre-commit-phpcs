@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+# BEGIN:metasyntactical/composer-codesniffer-hooks
+FILES=$(git diff --name-only --cached --diff-filter=ACMRTUXB | grep .php);
+if [ ! -z "$FILES" ]; then
+	printf "Running Code Sniffer..."
+	vendor/bin/phpcs $FILES --standard={STANDARDPATH}
+	if [ $? -ne 0 ]
+	then
+		printf "\033[0;41;37mFix coding standards before commit!\033[0m\n"
+		exit 1
+	fi
+fi
+# END:metasyntactical/composer-codesniffer-hooks

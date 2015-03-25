@@ -1,0 +1,30 @@
+{
+    "name": "metasyntactical/composer-codesniffer-hooks",
+    "description": "PHP CodeSniffer script hooks for composer",
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniel Kreuer",
+            "email": "d.kreuer@danielkreuer.com"
+        }
+    ],
+    "require": {
+        "php": ">= 5.5.0",
+        "squizlabs/php_codesniffer": "~2.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.5",
+        "composer/composer": "~1.0@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "MetaSyntactical\\CodeSniffer\\Composer\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MetaSyntactical\\CodeSniffer\\Composer\\": "tests/"
+        }
+    }
+}
