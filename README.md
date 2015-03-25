@@ -25,7 +25,7 @@ Add scripts to composer post hooks:
         "MetaSyntactical\\CodeSniffer\\Composer\\ScriptHandler::addPhpCsToPreCommitHook"
     ]
 }
-```json
+```
 
 ## Usage
 
