@@ -26,5 +26,10 @@
         "psr-4": {
             "MetaSyntactical\\CodeSniffer\\Composer\\": "tests/"
         }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
     }
 }
