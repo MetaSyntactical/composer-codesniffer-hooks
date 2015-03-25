@@ -3,11 +3,11 @@
 namespace MetaSyntactical\CodeSniffer\Composer;
 
 use Composer\Composer;
+use Composer\Config;
 use Composer\IO\IOInterface;
 use Composer\Package\RootPackageInterface;
 use Composer\Script\Event;
 use FilesystemIterator;
-use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -222,11 +222,6 @@ EOF
                 )
             ))
         ;
-        $package
-            ->expects(self::any())
-            ->method("getTargetDir")
-            ->will(self::returnValue("vendor"))
-        ;
 
         $className = $this->testClassName;
         $className::addPhpCsToPreCommitHook($event);
@@ -258,7 +253,10 @@ EOF
      */
     private function mockScriptEvent()
     {
+        $config = new Config(false);
+        $config->merge('vendor-dir', 'vendor');
         $composer = new Composer();
+        $composer->setConfig($config);
         $package = $this
             ->getMockForAbstractClass(
                 RootPackageInterface::class

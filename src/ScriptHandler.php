@@ -39,6 +39,9 @@ class ScriptHandler
             return;
         }
         $originFile = getcwd().'/.git/hooks/pre-commit';
+        if (!is_dir(dirname($originFile))) {
+            mkdir(dirname($originFile, 0777, true));
+        }
         $templateContent = file_get_contents(__DIR__.'/templates/git/hooks/pre-commit-phpcs');
         $originContent = '';
         if (file_exists($originFile)) {
@@ -56,7 +59,7 @@ class ScriptHandler
                 "{STANDARDPATH}"
             ),
             array(
-                $event->getComposer()->getPackage()->getTargetDir()."/${dependencyToResolve}/ruleset.xml"
+                ltrim($event->getComposer()->getConfig()->get("vendor-dir"), "/")."/${dependencyToResolve}/ruleset.xml"
             ),
             $templateContent
         );
