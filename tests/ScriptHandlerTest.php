@@ -253,7 +253,7 @@ EOF
      */
     private function mockScriptEvent()
     {
-        $config = new Config(false);
+        $config = new Config(false, getcwd());
         $config->merge('vendor-dir', 'vendor');
         $composer = new Composer();
         $composer->setConfig($config);

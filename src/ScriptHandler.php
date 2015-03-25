@@ -2,6 +2,7 @@
 
 namespace MetaSyntactical\CodeSniffer\Composer;
 
+use Composer\Config;
 use Composer\Script\Event;
 
 class ScriptHandler
@@ -59,7 +60,7 @@ class ScriptHandler
                 "{STANDARDPATH}"
             ),
             array(
-                ltrim($event->getComposer()->getConfig()->get("vendor-dir"), "/")."/${dependencyToResolve}/ruleset.xml"
+                $event->getComposer()->getConfig()->get("vendor-dir", Config::RELATIVE_PATHS)."/${dependencyToResolve}/ruleset.xml"
             ),
             $templateContent
         );
