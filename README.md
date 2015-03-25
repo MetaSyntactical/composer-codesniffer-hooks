@@ -27,6 +27,19 @@ Add scripts to composer post hooks:
 }
 ```
 
+Add the codesniffer standard which has been installed as dependency (e.g. "metasyntactical/symfony-coding-standard") to the
+extra field in composer.json:
+
+```json
+"extras": {
+    "codesniffer": {
+        "standard": {
+            "dependency": "metasyntactical/symfony-coding-standard"
+        }
+    }
+}
+```
+
 ## Usage
 
 Every time you try to commit, PHP_CodeSniffer will run on changed `.php` files only. There is nothing to do manually.
