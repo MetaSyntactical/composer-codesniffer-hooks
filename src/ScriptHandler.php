@@ -65,5 +65,8 @@ class ScriptHandler
             $templateContent
         );
         file_put_contents($originFile, $newContent);
+        $perms = fileperms($originFile);
+        chmod($originFile, $perms | 0x0040 | 0x008 | 0x0001);
+        clearstatcache(null, $originFile);
     }
 }

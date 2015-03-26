@@ -91,6 +91,7 @@ class ScriptHandlerTest extends PHPUnit_Framework_TestCase
             "--standard=vendor/example/coding-standard/ruleset.xml",
             file_get_contents(getcwd()."/.git/hooks/pre-commit")
         );
+        self::assertEquals("0755", substr(sprintf("%o", fileperms(getcwd()."/.git/hooks/pre-commit")), -4));
     }
 
     public function testThatPreCommitHookIsInsertedOnBlankFile()
@@ -145,6 +146,7 @@ class ScriptHandlerTest extends PHPUnit_Framework_TestCase
 foobar
 EOF
 );
+        chmod(getcwd()."/.git/hooks/pre-commit", 0777);
         self::assertFileExists(getcwd()."/.git/hooks/pre-commit", "Precondition failed: Pre-Commit not exists");
 
         list($event, $package, $io) = $this->mockScriptEvent();
@@ -187,6 +189,7 @@ EOF
             "foobar",
             file_get_contents(getcwd()."/.git/hooks/pre-commit")
         );
+        self::assertEquals("0777", substr(sprintf("%o", fileperms(getcwd()."/.git/hooks/pre-commit")), -4));
     }
 
     public function testThatPreCommitHookIsNotInsertedIfAlreadyPresent()
