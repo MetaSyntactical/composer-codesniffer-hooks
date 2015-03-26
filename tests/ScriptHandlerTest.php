@@ -91,7 +91,9 @@ class ScriptHandlerTest extends PHPUnit_Framework_TestCase
             "--standard=vendor/example/coding-standard/ruleset.xml",
             file_get_contents(getcwd()."/.git/hooks/pre-commit")
         );
-        self::assertEquals("0755", substr(sprintf("%o", fileperms(getcwd()."/.git/hooks/pre-commit")), -4));
+        self::assertTrue(
+            (0x0040 | 0x0008 | 0x0001) == (fileperms(getcwd()."/.git/hooks/pre-commit") & (0x0040 | 0x0008 | 0x0001))
+        );
     }
 
     public function testThatPreCommitHookIsInsertedOnBlankFile()
