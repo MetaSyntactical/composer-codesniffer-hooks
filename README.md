@@ -6,6 +6,10 @@
 
 Hooks to enable PHP CodeSniffer with the Coding Standard configurable after running `composer install` or `composer update`.
 
+## The project is abandoned!
+
+**This project is abandoned in favor of [captainhook/captainhook](https://packagist.org/packages/captainhook/captainhook) providing general git hooks management. Everything in this repository can be achieved with captainhook/captainhook.**
+
 ## Install
 
 Install dependency via composer:

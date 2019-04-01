@@ -3,6 +3,7 @@
     "description": "PHP CodeSniffer script hooks for composer",
     "minimum-stability": "stable",
     "license": "MIT",
+    "abandoned": "captainhook/captainhook",
     "authors": [
         {
             "name": "Daniel Kreuer",
